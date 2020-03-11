@@ -1,14 +1,13 @@
+<!DOCTYPE html>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
-
-<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<title>Create an account</title>
-<%-- <link href="${contextPath}/resources/css/bootstrap.min.css"
-	rel="stylesheet"> --%>
+<%@ page isELIgnored="false"%>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Add Route</title>
 <link href="${contextPath}/resources/css/slidebar.css" rel="stylesheet">
 <script src="${contextPath}/resources/js/slidebar.js"></script>
 <link href="${contextPath}/resources/css/common.css" rel="stylesheet">
@@ -22,6 +21,18 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script>
+	$(document).ready(
+			function() {
+				$(".custom-file-input").on(
+						"change",
+						function() {
+							var fileName = $(this).val().split("\\").pop();
+							$(this).siblings(".custom-file-label").addClass(
+									"selected").html(fileName);
+						});
+			});
+</script>
 </head>
 <body>
 	<div class="container-fluid" style="height: 75px;">
@@ -31,7 +42,7 @@
 					value="${_csrf.token}" />
 			</form>
 			<nav class="navbar navbar-expand-sm bg-secondary"
-				style="height: 75px;">
+				style="height: 75px">
 				<div id="mySidebar" class="sidebar">
 					<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
 					<h3>Routes</h3>
@@ -48,6 +59,7 @@
 						href="${contextPath}/userByName/${pageContext.request.userPrincipal.name}"><i
 						class="fa fa-vcard-o"></i>My Profile</a>
 				</div>
+
 				<div id="main">
 					<button class="openbtn" onclick="openNav()">&#9776;</button>
 				</div>
@@ -77,52 +89,81 @@
 			</nav>
 		</c:if>
 	</div>
-	<br>
-	<div id="demo" class="carousel slide" data-ride="carousel"
-		align="center">
-		<ul class="carousel-indicators">
-			<li data-target="#demo" data-slide-to="0" class="active"></li>
-			<li data-target="#demo" data-slide-to="1"></li>
-			<li data-target="#demo" data-slide-to="2"></li>
-		</ul>
+	<div>
+		<h2 align="center">New Route</h2>
+		<div>
+			<div>
+				<form
+					action="${contextPath}/add?${_csrf.parameterName}=${_csrf.token}"
+					method="post" enctype="multipart/form-data">
+					<div align="center">
+						<div class="form-group">
+							<label>Route Name:</label> <input type="text" name="routename"
+								class="form-control" required="required" style="width: 50%;" />
+						</div>
+						<div class="form-group">
+							<label>Category:</label> <select name="category"
+								class="form-control" required="required" style="width: 50%;">
+								<option value="All Categories">All Categories</option>
+								<option value="By Car">By Car</option>
+								<option value="On Foot">On Foot</option>
+								<option value="Public Transport">Public Transport</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label>Keywords:</label> <input type="text" name="keyword"
+								class="form-control" required="required" style="width: 50%;" />
+						</div>
+						<div class="form-group">
+							<label>Description:</label>
+							<textarea id="rdescription" name="rdescription"
+								class="form-control" required="required" style="width: 50%;"></textarea>
+						</div>
+						<div class="form-group">
+							<label>From :</label> <input type="text" name="fromaddress"
+								class="form-control" required="required" style="width: 50%;" />
+						</div>
+						<div class="form-group">
+							<label>To :</label> <input type="text" name="toaddress"
+								class="form-control" required="required" style="width: 50%;" />
+						</div>
+						<div>
+							<h3>Interesting place</h3>
+						</div>
+						<div class="form-group">
+							<label>Location:</label> <input type="text" name="ilocation"
+								class="form-control" required="required" style="width: 50%;" />
+						</div>
+						<div class="form-group">
+							<label>Name:</label> <input type="text" name="iname"
+								class="form-control" required="required" style="width: 50%;" />
+						</div>
+						<div class="form-group">
+							<label>Description:</label>
+							<textarea name="idescription" class="form-control"
+								required="required" style="width: 50%;"></textarea>
+						</div>
 
-		<div class="carousel-inner">
-			<div class="carousel-item active">
-				<img src="${contextPath}/images/charminar.jpg" alt="" width="1000"
-					height="600">
-			</div>
-			<div class="carousel-item">
-				<img src="${contextPath}/images/goldenbeach.jpg" alt="" width="1000"
-					height="600">
-			</div>
-			<div class="carousel-item">
-				<img src="${contextPath}/images/bagabeach.jpg" alt="" width="1000"
-					height="600">
+						<label>Image:</label>
+						<div class="custom-file" style="margin-left: 350px;">
+							<input type="file" name="file" class="custom-file-input btn" />
+							<label class="custom-file-label" style="width: 50%;">Choose
+								file</label>
+						</div>
+
+						<div>
+							<input type="hidden" value="${route.user}" name="user" />
+						</div>
+					</div>
+					<br>
+					<div align="center">
+						<div>
+							<input type="submit" value="Add Route" class="btn btn-primary">
+						</div>
+					</div>
+				</form>
 			</div>
 		</div>
-		<!-- <a class="carousel-control-prev" href="#demo" data-slide="prev"> <span
-			class="carousel-control-prev-icon"></span>
-		</a> <a class="carousel-control-next" href="#demo" data-slide="next">
-			<span class="carousel-control-next-icon"></span>
-		</a> -->
-	</div>
-	<br>
-	<div align="center">
-		<form action="${contextPath}/search" method="Get">
-			<input type="text" name="from" placeholder="from"
-				style="height: 35px; width: 200px; border-radius: 10px;" />&nbsp;&nbsp;
-			<input type="text" name="to" placeholder="to"
-				style="height: 35px; width: 200px; border-radius: 10px;" />&nbsp;&nbsp;
-			<select name="category" style="height: 35px; width: 150px;">
-				<option>Select Category</option>
-				<option>All Categories</option>
-				<option>By Car</option>
-				<option>On foot</option>
-				<option>Public Transport</option>
-			</select>&nbsp;&nbsp; <input type="submit" class="btn btn-primary"
-				value="Search"
-				style="height: 35px; width: 100px; border-radius: 5px;">
-		</form>
 	</div>
 </body>
 </html>

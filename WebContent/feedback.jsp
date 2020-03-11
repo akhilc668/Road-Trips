@@ -1,14 +1,13 @@
+<!DOCTYPE html>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
-
-<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<title>Create an account</title>
-<%-- <link href="${contextPath}/resources/css/bootstrap.min.css"
-	rel="stylesheet"> --%>
+<%@ page isELIgnored="false"%>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>My Profile</title>
 <link href="${contextPath}/resources/css/slidebar.css" rel="stylesheet">
 <script src="${contextPath}/resources/js/slidebar.js"></script>
 <link href="${contextPath}/resources/css/common.css" rel="stylesheet">
@@ -31,7 +30,7 @@
 					value="${_csrf.token}" />
 			</form>
 			<nav class="navbar navbar-expand-sm bg-secondary"
-				style="height: 75px;">
+				style="height: 75px">
 				<div id="mySidebar" class="sidebar">
 					<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
 					<h3>Routes</h3>
@@ -48,6 +47,7 @@
 						href="${contextPath}/userByName/${pageContext.request.userPrincipal.name}"><i
 						class="fa fa-vcard-o"></i>My Profile</a>
 				</div>
+
 				<div id="main">
 					<button class="openbtn" onclick="openNav()">&#9776;</button>
 				</div>
@@ -77,52 +77,26 @@
 			</nav>
 		</c:if>
 	</div>
-	<br>
-	<div id="demo" class="carousel slide" data-ride="carousel"
-		align="center">
-		<ul class="carousel-indicators">
-			<li data-target="#demo" data-slide-to="0" class="active"></li>
-			<li data-target="#demo" data-slide-to="1"></li>
-			<li data-target="#demo" data-slide-to="2"></li>
-		</ul>
-
-		<div class="carousel-inner">
-			<div class="carousel-item active">
-				<img src="${contextPath}/images/charminar.jpg" alt="" width="1000"
-					height="600">
-			</div>
-			<div class="carousel-item">
-				<img src="${contextPath}/images/goldenbeach.jpg" alt="" width="1000"
-					height="600">
-			</div>
-			<div class="carousel-item">
-				<img src="${contextPath}/images/bagabeach.jpg" alt="" width="1000"
-					height="600">
+	<div>
+		<h2 align="center">Profile</h2>
+		<div align="center">
+			<div>
+				<form action="${contextPath}/feedback" method="get">
+					<div class="form-group">
+						<label>Name:</label> <input type="text" name="name"
+							class="form-control" style="width: 50%;" />
+					</div>
+					<div class="form-group">
+						<label>Feedback:</label>
+						<textarea name="feedback" class="form-control" style="width: 50%;"></textarea>
+					</div>
+					<br>
+					<div>
+						<input type="submit" value="Feedback" class="btn btn-primary">
+					</div>
+				</form>
 			</div>
 		</div>
-		<!-- <a class="carousel-control-prev" href="#demo" data-slide="prev"> <span
-			class="carousel-control-prev-icon"></span>
-		</a> <a class="carousel-control-next" href="#demo" data-slide="next">
-			<span class="carousel-control-next-icon"></span>
-		</a> -->
-	</div>
-	<br>
-	<div align="center">
-		<form action="${contextPath}/search" method="Get">
-			<input type="text" name="from" placeholder="from"
-				style="height: 35px; width: 200px; border-radius: 10px;" />&nbsp;&nbsp;
-			<input type="text" name="to" placeholder="to"
-				style="height: 35px; width: 200px; border-radius: 10px;" />&nbsp;&nbsp;
-			<select name="category" style="height: 35px; width: 150px;">
-				<option>Select Category</option>
-				<option>All Categories</option>
-				<option>By Car</option>
-				<option>On foot</option>
-				<option>Public Transport</option>
-			</select>&nbsp;&nbsp; <input type="submit" class="btn btn-primary"
-				value="Search"
-				style="height: 35px; width: 100px; border-radius: 5px;">
-		</form>
 	</div>
 </body>
 </html>

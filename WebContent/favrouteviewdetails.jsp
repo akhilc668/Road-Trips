@@ -1,14 +1,19 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Create an account</title>
-<%-- <link href="${contextPath}/resources/css/bootstrap.min.css"
-	rel="stylesheet"> --%>
+<title>Route Details</title>
+<style type="text/css">
+th, td {
+	text-align: center;
+}
+</style>
+<link href="${contextPath}/resources/css/viewdetails.css"
+	rel="stylesheet">
 <link href="${contextPath}/resources/css/slidebar.css" rel="stylesheet">
 <script src="${contextPath}/resources/js/slidebar.js"></script>
 <link href="${contextPath}/resources/css/common.css" rel="stylesheet">
@@ -22,6 +27,20 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script type="text/javascript">
+	/* function alertfavourite(){
+	 var status=document.getElementById("status").value
+	 if(status){
+	 alert("It is already yours favourite")
+	 }
+	 } */
+	$(document).ready(function() {
+		var status = $("#status").val()
+		if (status) {
+			alert("It is already yours favourite")
+		}
+	});
+</script>
 </head>
 <body>
 	<div class="container-fluid" style="height: 75px;">
@@ -31,7 +50,7 @@
 					value="${_csrf.token}" />
 			</form>
 			<nav class="navbar navbar-expand-sm bg-secondary"
-				style="height: 75px;">
+				style="height: 75px">
 				<div id="mySidebar" class="sidebar">
 					<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
 					<h3>Routes</h3>
@@ -48,6 +67,7 @@
 						href="${contextPath}/userByName/${pageContext.request.userPrincipal.name}"><i
 						class="fa fa-vcard-o"></i>My Profile</a>
 				</div>
+
 				<div id="main">
 					<button class="openbtn" onclick="openNav()">&#9776;</button>
 				</div>
@@ -77,52 +97,28 @@
 			</nav>
 		</c:if>
 	</div>
+	<input type="hidden" id="status" value="${status}">
 	<br>
-	<div id="demo" class="carousel slide" data-ride="carousel"
-		align="center">
-		<ul class="carousel-indicators">
-			<li data-target="#demo" data-slide-to="0" class="active"></li>
-			<li data-target="#demo" data-slide-to="1"></li>
-			<li data-target="#demo" data-slide-to="2"></li>
-		</ul>
-
-		<div class="carousel-inner">
-			<div class="carousel-item active">
-				<img src="${contextPath}/images/charminar.jpg" alt="" width="1000"
-					height="600">
-			</div>
-			<div class="carousel-item">
-				<img src="${contextPath}/images/goldenbeach.jpg" alt="" width="1000"
-					height="600">
-			</div>
-			<div class="carousel-item">
-				<img src="${contextPath}/images/bagabeach.jpg" alt="" width="1000"
-					height="600">
+	<div id="body">
+		<div id="divleft">
+			<img alt="" src="${contextPath}/images/${route.path}" id="image">
+		</div>
+		<div id="divright">
+			<div id="right">
+				<h3>Route:</h3>
+				<Label><b>Name:</b></Label>&nbsp;${route.routename}<br> <Label><b>Category
+						:&nbsp;</b></Label>${route.category}<br> <label><i
+					class="fa fa-map-pin" style="color: blue;"></i>&nbsp;${route.fromaddress}</label>&nbsp;
+				to &nbsp;<label><i class="fa fa-map-pin" style="color: red;"></i>&nbsp;${route.toaddress}</label><br>
+				<Label><b>Description:</b>&nbsp;</Label>${route.rdescription}<br>
+				<Label><b>Created By:</b>&nbsp;</Label>${route.user}<br> <br>
+				<h3>Interesting Place:</h3>
+				<Label><b>Name:&nbsp;</b></Label>${route.iname}<br> <label>
+					<i class='fa fa-map-marker' style="color: lime;"></i>&nbsp;${route.ilocation}
+				</label><br> <Label><b>Description:&nbsp;</b></Label>${route.idescription}<br>
+				<br>
 			</div>
 		</div>
-		<!-- <a class="carousel-control-prev" href="#demo" data-slide="prev"> <span
-			class="carousel-control-prev-icon"></span>
-		</a> <a class="carousel-control-next" href="#demo" data-slide="next">
-			<span class="carousel-control-next-icon"></span>
-		</a> -->
-	</div>
-	<br>
-	<div align="center">
-		<form action="${contextPath}/search" method="Get">
-			<input type="text" name="from" placeholder="from"
-				style="height: 35px; width: 200px; border-radius: 10px;" />&nbsp;&nbsp;
-			<input type="text" name="to" placeholder="to"
-				style="height: 35px; width: 200px; border-radius: 10px;" />&nbsp;&nbsp;
-			<select name="category" style="height: 35px; width: 150px;">
-				<option>Select Category</option>
-				<option>All Categories</option>
-				<option>By Car</option>
-				<option>On foot</option>
-				<option>Public Transport</option>
-			</select>&nbsp;&nbsp; <input type="submit" class="btn btn-primary"
-				value="Search"
-				style="height: 35px; width: 100px; border-radius: 5px;">
-		</form>
 	</div>
 </body>
 </html>

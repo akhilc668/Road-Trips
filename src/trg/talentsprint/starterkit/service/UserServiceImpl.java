@@ -30,4 +30,10 @@ public class UserServiceImpl implements UserService {
     public User findByUsername(String username) {
         return userRepository.findByUsername(username);
     }
+
+	@Override
+	public void updateUser(long id, String aboutmyself,String path) {
+		userRepository.updateuser(id,aboutmyself,path);
+		
+	}
 }

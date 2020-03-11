@@ -26,6 +26,10 @@ public class User {
 
     @ManyToMany
     private Set<Role> roles;
+    
+    private String email;
+    private String aboutmyself;
+    private String path;
 
     public Long getId() {
         return id;
@@ -66,4 +70,30 @@ public class User {
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getAboutmyself() {
+		return aboutmyself;
+	}
+
+	public void setAboutmyself(String aboutmyself) {
+		this.aboutmyself = aboutmyself;
+	}
+
+	public String getPath() {
+		return path;
+	}
+
+	public void setPath(String path) {
+		this.path = path;
+	}
+    
+    
 }
