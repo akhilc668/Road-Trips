@@ -7,7 +7,7 @@
 <head>
 <%@ page isELIgnored="false"%>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>My Profile</title>
+<title>Feedback</title>
 <link href="${contextPath}/resources/css/slidebar.css" rel="stylesheet">
 <script src="${contextPath}/resources/js/slidebar.js"></script>
 <link href="${contextPath}/resources/css/common.css" rel="stylesheet">
@@ -78,7 +78,7 @@
 		</c:if>
 	</div>
 	<div>
-		<h2 align="center">Profile</h2>
+		<h2 align="center">Feedback</h2>
 		<div align="center">
 			<div>
 				<form action="${contextPath}/feedback" method="get">

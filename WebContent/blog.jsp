@@ -6,7 +6,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Create an account</title>
+<title>Blog</title>
 <%-- <link href="${contextPath}/resources/css/bootstrap.min.css"
 	rel="stylesheet"> --%>
 <link href="${contextPath}/resources/css/slidebar.css" rel="stylesheet">
